@@ -146,7 +146,9 @@ class BookController extends Controller
     public function destroy($id)
     {
         $book = Book::find($id);
-        Storage::delete('public/image/' . $book->poster);
+        if($book->poster!='noposter.png'){
+            Storage::delete('public/image/' . $book->poster);
+        }
         $book->delete();
         return redirect(route('book.index'));
     }
